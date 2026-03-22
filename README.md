@@ -279,18 +279,6 @@ docker compose down -v && docker compose up -d --build
 - Do not commit `.env` files or private keys
 - This repository intentionally ignores dependency folders, local DB files, and generated local artifacts
 
-## Key Documentation
-
-- [docs/COMPONENT_CATALOG.md](docs/COMPONENT_CATALOG.md)
-- [docs/GITBOOK_SYSTEM.md](docs/GITBOOK_SYSTEM.md)
-- [docs/LLM_AGENT_ARCHITECTURE.md](docs/LLM_AGENT_ARCHITECTURE.md)
-- [docs/LLM_SHARED_MARKETPLACE_ARCHITECTURE.md](docs/LLM_SHARED_MARKETPLACE_ARCHITECTURE.md)
-- [docs/ADMIN_V2_MIGRATION_PLAN.md](docs/ADMIN_V2_MIGRATION_PLAN.md)
-- [docs/ADMIN_V2_PARITY_AUDIT_PLAN.md](docs/ADMIN_V2_PARITY_AUDIT_PLAN.md)
-- [docs/ADMIN_V2_SMOKE_CHECKLIST.md](docs/ADMIN_V2_SMOKE_CHECKLIST.md)
-
-## Scripts Reference
-
 ### Root scripts
 
 - `npm run dev` — start backend + frontend via dev runner
