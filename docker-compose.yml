@@ -1,0 +1,77 @@
+# ═══════════════════════════════════════════════════════════════════
+# ODROB Trading — Local Docker stack (PostgreSQL)
+#
+# Usage:
+#   docker compose up -d              # start postgres + backend + frontend
+#   docker compose up -d --build      # rebuild + start
+#   docker compose logs -f postgres   # follow database logs
+#   docker compose logs -f backend    # follow backend logs
+#   docker compose logs -f frontend   # follow frontend logs
+#   docker compose down               # stop all
+#   docker compose down -v            # stop + wipe database volume
+# ═══════════════════════════════════════════════════════════════════
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: odrob-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-odrob}
+      POSTGRES_USER: ${POSTGRES_USER:-odrob}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - odrob-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-odrob} -d ${POSTGRES_DB:-odrob}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: odrob-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${APP_BACKEND_PORT:-3001}:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - DB_DRIVER=${DB_DRIVER:-postgres}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-odrob}:${POSTGRES_PASSWORD:-change-me}@postgres:5432/${POSTGRES_DB:-odrob}
+      - SQLITE_PATH=${SQLITE_PATH:-:memory:}
+      - PUBLIC_WEB_ORIGIN=${PUBLIC_WEB_ORIGIN:-http://localhost:${APP_FRONTEND_PORT:-3000}}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:${APP_FRONTEND_PORT:-3000}}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3001/api/engine/metrics').then(r=>{if(!r.ok)throw 1}).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        VITE_API_TARGET: ${VITE_API_TARGET:-/api}
+        VITE_PRIVY_APP_ID: ${VITE_PRIVY_APP_ID:-}
+        VITE_PRIVY_CLIENT_ID: ${VITE_PRIVY_CLIENT_ID:-}
+    container_name: odrob-frontend
+    ports:
+      - "${APP_FRONTEND_PORT:-3000}:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  odrob-postgres-data:
+    name: odrob-postgres-data

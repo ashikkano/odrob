@@ -1,0 +1,37 @@
+# ═══════════════════════════════════════════════════════════════════
+# Docker ignore — keep images lean (OPS-001)
+# ═══════════════════════════════════════════════════════════════════
+
+# Dependencies (installed inside containers)
+node_modules
+server/node_modules
+
+# Local environment files must never enter the build context
+.env
+.env.*
+!.env.example
+
+# Database files (mounted as volume)
+server/data
+
+# Build output (frontend Dockerfile builds fresh)
+dist
+
+# Git
+.git
+.gitignore
+
+# IDE / Editor
+.vscode
+.idea
+
+# Logs & temp
+*.log
+_pnl_output.txt
+analyze_agents.py
+test_*.js
+run_test*.sh
+_test_*
+
+# Docs (not needed in runtime image)
+docs

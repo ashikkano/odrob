@@ -1,0 +1,29 @@
+{
+  "name": "odrob-wallet-server",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "db:postgres:dry-run": "node scripts/migrate-sqlite-to-postgres.mjs --dry-run",
+    "db:postgres:migrate": "node scripts/migrate-sqlite-to-postgres.mjs",
+    "db:postgres:verify": "node scripts/verify-postgres-migration.mjs"
+  },
+  "dependencies": {
+    "@privy-io/node": "^0.11.0",
+    "@tetherto/wdk-wallet-ton": "^1.0.0-beta.7",
+    "@ton/core": "^0.62.0",
+    "@ton/crypto": "^3.3.0",
+    "@ton/ton": "^15.2.1",
+    "better-sqlite3": "^12.6.2",
+    "bip39": "^3.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "express-rate-limit": "^8.3.1",
+    "helmet": "^8.1.0",
+    "jose": "^6.1.0",
+    "pg": "^8.20.0",
+    "zod": "^4.3.6"
+  }
+}

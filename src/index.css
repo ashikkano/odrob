@@ -1,0 +1,1209 @@
+@import "tailwindcss";
+
+/* === ODROB Trading Design System === */
+/* Dark-first trading terminal aesthetic */
+
+@theme inline {
+  --color-background: oklch(0.13 0.005 260);
+  --color-foreground: oklch(0.95 0.01 260);
+
+  --color-card: oklch(0.16 0.008 260);
+  --color-card-foreground: oklch(0.95 0.01 260);
+
+  --color-muted: oklch(0.21 0.01 260);
+  --color-muted-foreground: oklch(0.55 0.02 260);
+
+  --color-popover: oklch(0.17 0.008 260);
+  --color-popover-foreground: oklch(0.95 0.01 260);
+
+  --color-border: oklch(0.26 0.015 260);
+  --color-input: oklch(0.24 0.012 260);
+  --color-ring: oklch(0.55 0.15 250);
+
+  --color-primary: oklch(0.65 0.18 250);
+  --color-primary-foreground: oklch(0.98 0.005 260);
+
+  --color-secondary: oklch(0.24 0.015 260);
+  --color-secondary-foreground: oklch(0.9 0.01 260);
+
+  --color-accent: oklch(0.2 0.02 260);
+  --color-accent-foreground: oklch(0.9 0.01 260);
+
+  --color-destructive: oklch(0.6 0.22 25);
+  --color-destructive-foreground: oklch(0.98 0.005 25);
+
+  --color-profit: oklch(0.72 0.19 155);
+  --color-profit-muted: oklch(0.72 0.19 155 / 0.15);
+  --color-loss: oklch(0.65 0.22 25);
+  --color-loss-muted: oklch(0.65 0.22 25 / 0.15);
+  --color-bid: oklch(0.72 0.19 155);
+  --color-bid-muted: oklch(0.72 0.19 155 / 0.1);
+  --color-ask: oklch(0.65 0.22 25);
+  --color-ask-muted: oklch(0.65 0.22 25 / 0.1);
+
+  --color-corridor: oklch(0.65 0.18 250 / 0.12);
+  --color-corridor-border: oklch(0.65 0.18 250 / 0.28);
+
+  --color-agent-active: oklch(0.72 0.19 155);
+  --color-agent-paused: oklch(0.75 0.15 85);
+  --color-agent-stopped: oklch(0.5 0.02 260);
+  --color-agent-error: oklch(0.65 0.22 25);
+
+  --color-sidebar: oklch(0.14 0.008 260);
+  --color-sidebar-foreground: oklch(0.75 0.01 260);
+  --color-sidebar-border: oklch(0.21 0.01 260);
+  --color-sidebar-accent: oklch(0.18 0.02 260);
+  --color-sidebar-accent-foreground: oklch(0.92 0.01 260);
+
+  --color-chart-1: oklch(0.65 0.18 250);
+  --color-chart-2: oklch(0.72 0.19 155);
+  --color-chart-3: oklch(0.75 0.15 85);
+  --color-chart-4: oklch(0.7 0.18 310);
+  --color-chart-5: oklch(0.65 0.22 25);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+}
+
+/* === Base === */
+* {
+  border-color: var(--color-border);
+}
+
+html,
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.od-page-shell {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.od-page-shell-wide {
+  max-width: 1440px;
+}
+
+.od-page-shell-narrow {
+  max-width: 1120px;
+}
+
+.od-page-hero {
+  border: 1px solid color-mix(in oklch, var(--color-border) 78%, white 8%);
+  border-radius: 1.25rem;
+  padding: 1.1rem 1.15rem;
+  background:
+    radial-gradient(circle at top right, oklch(0.65 0.18 250 / 0.11), transparent 24%),
+    linear-gradient(180deg, color-mix(in oklch, var(--color-card) 92%, white 2%), color-mix(in oklch, var(--color-card) 98%, black 4%));
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.16);
+}
+
+.od-page-hero-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.od-page-hero-copy {
+  min-width: 0;
+  flex: 1 1 420px;
+}
+
+.od-page-hero-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.od-page-hero-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in oklch, var(--color-card) 82%, white 6%);
+  color: color-mix(in oklch, var(--color-foreground) 78%, var(--color-primary) 22%);
+  border: 1px solid color-mix(in oklch, var(--color-border) 84%, white 10%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+}
+
+.od-page-hero-icon-default {
+  color: color-mix(in oklch, var(--color-foreground) 74%, var(--color-primary) 26%);
+}
+
+.od-page-hero-icon-trading {
+  background: color-mix(in oklch, var(--color-card) 78%, oklch(0.72 0.19 155 / 0.1) 22%);
+  color: color-mix(in oklch, oklch(0.72 0.19 155) 72%, white 8%);
+  border-color: color-mix(in oklch, oklch(0.72 0.19 155 / 0.26) 60%, var(--color-border) 40%);
+}
+
+.od-page-hero-icon-analytics {
+  background: color-mix(in oklch, var(--color-card) 80%, oklch(0.65 0.18 250 / 0.12) 20%);
+  color: color-mix(in oklch, oklch(0.65 0.18 250) 70%, white 8%);
+  border-color: color-mix(in oklch, oklch(0.65 0.18 250 / 0.28) 62%, var(--color-border) 38%);
+}
+
+.od-page-hero-icon-agents {
+  background: color-mix(in oklch, var(--color-card) 80%, oklch(0.7 0.18 310 / 0.12) 20%);
+  color: color-mix(in oklch, oklch(0.7 0.18 310) 72%, white 8%);
+  border-color: color-mix(in oklch, oklch(0.7 0.18 310 / 0.28) 62%, var(--color-border) 38%);
+}
+
+.od-page-hero-icon-settings {
+  background: color-mix(in oklch, var(--color-card) 82%, oklch(0.6 0.02 260 / 0.2) 18%);
+  color: color-mix(in oklch, var(--color-foreground) 78%, oklch(0.6 0.02 260) 22%);
+  border-color: color-mix(in oklch, oklch(0.6 0.02 260 / 0.22) 50%, var(--color-border) 50%);
+}
+
+.od-page-hero-icon-llm {
+  background: color-mix(in oklch, var(--color-card) 78%, oklch(0.75 0.15 85 / 0.14) 22%);
+  color: color-mix(in oklch, oklch(0.75 0.15 85) 72%, white 6%);
+  border-color: color-mix(in oklch, oklch(0.75 0.15 85 / 0.28) 60%, var(--color-border) 40%);
+}
+
+.od-page-hero-icon-monitor {
+  background: color-mix(in oklch, var(--color-card) 80%, oklch(0.72 0.19 155 / 0.12) 20%);
+  color: color-mix(in oklch, oklch(0.72 0.19 155) 66%, white 8%);
+  border-color: color-mix(in oklch, oklch(0.72 0.19 155 / 0.26) 58%, var(--color-border) 42%);
+}
+
+.od-page-hero-icon-plan {
+  background: color-mix(in oklch, var(--color-card) 80%, oklch(0.55 0.2 310 / 0.14) 20%);
+  color: color-mix(in oklch, oklch(0.55 0.2 310) 70%, white 8%);
+  border-color: color-mix(in oklch, oklch(0.55 0.2 310 / 0.28) 62%, var(--color-border) 38%);
+}
+
+.od-page-hero-icon-orderbook {
+  background: color-mix(in oklch, var(--color-card) 78%, oklch(0.62 0.14 220 / 0.16) 22%);
+  color: color-mix(in oklch, oklch(0.62 0.14 220) 74%, white 8%);
+  border-color: color-mix(in oklch, oklch(0.62 0.14 220 / 0.28) 62%, var(--color-border) 38%);
+}
+
+.od-page-hero-title {
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.od-page-hero-description {
+  margin-top: 0.32rem;
+  max-width: 70ch;
+  color: color-mix(in oklch, var(--color-muted-foreground) 88%, white 10%);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.od-page-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.od-page-hero-chip {
+  border-color: color-mix(in oklch, var(--color-border) 78%, white 12%);
+  background: color-mix(in oklch, var(--color-card) 80%, transparent);
+  color: color-mix(in oklch, var(--color-foreground) 88%, var(--color-muted-foreground) 12%);
+}
+
+.od-page-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.od-page-hero-body {
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .od-page-shell {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .od-page-hero {
+    padding: 1.25rem 1.35rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .od-page-shell {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .od-page-hero-title-row {
+    gap: 0.75rem;
+  }
+
+  .od-page-hero-icon {
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: 0.8rem;
+  }
+
+  .od-page-hero-description {
+    font-size: 0.9rem;
+  }
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-muted); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-muted-foreground); }
+
+/* === Trading utilities === */
+.font-mono {
+  font-variant-numeric: tabular-nums;
+  font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+}
+
+/* Glow effects */
+.glow-profit { box-shadow: 0 0 20px oklch(0.72 0.19 155 / 0.15); }
+.glow-loss { box-shadow: 0 0 20px oklch(0.65 0.22 25 / 0.15); }
+.glow-primary { box-shadow: 0 0 20px oklch(0.65 0.18 250 / 0.2); }
+
+/* Pulse for live indicators */
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.animate-pulse-live { animation: pulse-live 2s ease-in-out infinite; }
+
+/* Price flash */
+@keyframes flash-green {
+  0% { background-color: oklch(0.72 0.19 155 / 0.3); }
+  100% { background-color: transparent; }
+}
+@keyframes flash-red {
+  0% { background-color: oklch(0.65 0.22 25 / 0.3); }
+  100% { background-color: transparent; }
+}
+.flash-profit { animation: flash-green 0.6s ease-out; }
+.flash-loss { animation: flash-red 0.6s ease-out; }
+
+/* === Light theme overrides === */
+.light {
+  --color-background: oklch(0.98 0.002 260);
+  --color-foreground: oklch(0.15 0.01 260);
+  
+  --color-card: oklch(1.0 0 0);
+  --color-card-foreground: oklch(0.15 0.01 260);
+  
+  --color-muted: oklch(0.94 0.005 260);
+  --color-muted-foreground: oklch(0.45 0.02 260);
+  
+  --color-popover: oklch(1.0 0 0);
+  --color-popover-foreground: oklch(0.15 0.01 260);
+  
+  --color-border: oklch(0.88 0.008 260);
+  --color-input: oklch(0.92 0.005 260);
+  --color-ring: oklch(0.55 0.15 250);
+  
+  --color-primary: oklch(0.5 0.2 250);
+  --color-primary-foreground: oklch(0.98 0.005 260);
+  
+  --color-secondary: oklch(0.94 0.008 260);
+  --color-secondary-foreground: oklch(0.25 0.01 260);
+  
+  --color-accent: oklch(0.94 0.01 260);
+  --color-accent-foreground: oklch(0.2 0.01 260);
+  
+  --color-destructive: oklch(0.55 0.24 25);
+  --color-destructive-foreground: oklch(0.98 0.005 25);
+
+  /* Trading colors — slightly deeper for contrast on white */
+  --color-profit: oklch(0.55 0.22 155);
+  --color-profit-muted: oklch(0.55 0.22 155 / 0.1);
+  --color-loss: oklch(0.55 0.24 25);
+  --color-loss-muted: oklch(0.55 0.24 25 / 0.1);
+  --color-bid: oklch(0.55 0.22 155);
+  --color-bid-muted: oklch(0.55 0.22 155 / 0.08);
+  --color-ask: oklch(0.55 0.24 25);
+  --color-ask-muted: oklch(0.55 0.24 25 / 0.08);
+
+  /* Corridor */
+  --color-corridor: oklch(0.5 0.2 250 / 0.08);
+  --color-corridor-border: oklch(0.5 0.2 250 / 0.25);
+
+  /* Agent states */
+  --color-agent-active: oklch(0.55 0.22 155);
+  --color-agent-paused: oklch(0.6 0.18 85);
+  --color-agent-stopped: oklch(0.6 0.02 260);
+  --color-agent-error: oklch(0.55 0.24 25);
+
+  /* Sidebar */
+  --color-sidebar: oklch(0.96 0.003 260);
+  --color-sidebar-foreground: oklch(0.35 0.01 260);
+  --color-sidebar-border: oklch(0.9 0.005 260);
+  --color-sidebar-accent: oklch(0.93 0.01 260);
+  --color-sidebar-accent-foreground: oklch(0.15 0.01 260);
+
+  /* Charts */
+  --color-chart-1: oklch(0.5 0.2 250);
+  --color-chart-2: oklch(0.55 0.22 155);
+  --color-chart-3: oklch(0.6 0.18 85);
+  --color-chart-4: oklch(0.55 0.2 310);
+  --color-chart-5: oklch(0.55 0.24 25);
+}
+
+/* === Autonomous agents landing === */
+.afl-page {
+  position: relative;
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(107, 92, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 82% 18%, rgba(56, 189, 248, 0.14), transparent 22%),
+    radial-gradient(circle at 72% 82%, rgba(45, 212, 191, 0.1), transparent 26%),
+    linear-gradient(180deg, #050814 0%, #09101d 48%, #07101b 100%);
+}
+
+.afl-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.afl-backdrop::before,
+.afl-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: auto;
+  width: 26rem;
+  height: 26rem;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.55;
+}
+
+.afl-backdrop::before {
+  left: -8rem;
+  top: -4rem;
+  background: rgba(102, 92, 255, 0.24);
+  animation: aflFloat 14s ease-in-out infinite;
+}
+
+.afl-backdrop::after {
+  right: -7rem;
+  bottom: -8rem;
+  background: rgba(45, 212, 191, 0.14);
+  animation: aflFloat 18s ease-in-out infinite reverse;
+}
+
+.afl-backdrop-svg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+}
+
+.afl-grid-lines path {
+  stroke-dasharray: 12 10;
+  animation: aflDash 28s linear infinite;
+}
+
+.afl-orbits {
+  transform-origin: 1125px 430px;
+  animation: aflRotate 24s linear infinite;
+}
+
+.afl-nodes circle:nth-child(1) { animation: aflPulse 5s ease-in-out infinite; }
+.afl-nodes circle:nth-child(2) { animation: aflPulse 4.2s ease-in-out infinite 0.8s; }
+.afl-nodes circle:nth-child(3) { animation: aflPulse 5.4s ease-in-out infinite 1.2s; }
+.afl-nodes circle:nth-child(4) { animation: aflPulse 4.8s ease-in-out infinite 0.3s; }
+
+.afl-beams path:first-child {
+  stroke-dasharray: 18 12;
+  animation: aflDash 16s linear infinite;
+}
+
+.afl-beams path:last-child {
+  stroke-dasharray: 10 12;
+  animation: aflDash 13s linear infinite reverse;
+}
+
+.afl-shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1520px;
+  min-height: 100vh;
+  height: auto;
+  margin: 0 auto;
+  padding: clamp(1rem, 1.6vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.85rem, 1.2vw, 1.1rem);
+}
+
+.afl-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(159, 179, 255, 0.18);
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(180deg, rgba(20, 26, 48, 0.92), rgba(10, 15, 29, 0.82)),
+    radial-gradient(circle at top right, rgba(82, 140, 255, 0.14), transparent 42%);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.afl-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.afl-brand-mark {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.9rem;
+  color: #eef2ff;
+  background: linear-gradient(135deg, rgba(104, 98, 255, 0.56), rgba(43, 198, 255, 0.34));
+  border: 1px solid rgba(150, 171, 255, 0.38);
+  box-shadow: 0 10px 28px rgba(49, 92, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.afl-brand-name {
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(248, 250, 255, 0.98);
+}
+
+.afl-brand-subtitle {
+  margin-top: 0.1rem;
+  color: rgba(224, 231, 255, 0.76);
+  font-size: 0.8rem;
+}
+
+.afl-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.afl-kicker-badge {
+  gap: 0.35rem;
+  border-color: rgba(180, 154, 255, 0.34);
+  background: linear-gradient(180deg, rgba(85, 66, 181, 0.28), rgba(44, 28, 106, 0.18));
+  color: rgba(245, 233, 255, 0.98);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.afl-topbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.2rem;
+  padding-inline: 0.95rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.afl-topbar-button:hover {
+  transform: translateY(-1px);
+}
+
+.afl-topbar-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(145, 197, 255, 0.42);
+}
+
+.afl-topbar-button-secondary {
+  color: rgba(244, 248, 255, 0.96);
+  border-color: rgba(155, 185, 255, 0.24);
+  background: linear-gradient(180deg, rgba(26, 38, 72, 0.86), rgba(17, 26, 48, 0.8));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.afl-topbar-button-secondary:hover {
+  color: rgba(255, 255, 255, 1);
+  border-color: rgba(167, 197, 255, 0.38);
+  background: linear-gradient(180deg, rgba(34, 50, 92, 0.94), rgba(22, 33, 59, 0.88));
+}
+
+.afl-topbar-button-primary {
+  color: #f9fcff;
+  border-color: rgba(120, 208, 255, 0.32);
+  background: linear-gradient(135deg, rgba(100, 97, 255, 0.98), rgba(47, 197, 255, 0.94));
+  box-shadow: 0 14px 32px rgba(49, 114, 255, 0.28);
+}
+
+.afl-topbar-button-primary:hover {
+  color: #ffffff;
+  border-color: rgba(170, 232, 255, 0.46);
+  background: linear-gradient(135deg, rgba(113, 111, 255, 1), rgba(66, 209, 255, 0.98));
+  box-shadow: 0 18px 38px rgba(49, 114, 255, 0.34);
+}
+
+.afl-stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.82fr);
+  gap: clamp(0.85rem, 1.1vw, 1rem);
+}
+
+.afl-hero-panel,
+.afl-summary-card,
+.afl-activity-card,
+.afl-principles-card,
+.afl-signal-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(12, 16, 31, 0.82), rgba(7, 10, 22, 0.64));
+  backdrop-filter: blur(18px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+}
+
+.afl-hero-panel,
+.afl-side-rail {
+  min-height: 0;
+}
+
+.afl-hero-panel {
+  border-radius: 1.6rem;
+  padding: clamp(1.35rem, 1.9vw, 1.85rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.afl-hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: auto auto -18% -14%;
+  width: 22rem;
+  height: 22rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(110, 99, 255, 0.14), rgba(88, 196, 255, 0));
+}
+
+.afl-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.afl-status-badge {
+  gap: 0.35rem;
+  padding-inline: 0.7rem;
+  border-radius: 999px;
+}
+
+.afl-status-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 14px rgba(74, 222, 128, 0.9);
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+.afl-status-text {
+  color: rgba(224, 231, 255, 0.64);
+  font-size: 0.87rem;
+}
+
+.afl-title {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  width: max-content;
+  font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+  line-height: 0.94;
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.afl-title-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.afl-description {
+  position: relative;
+  z-index: 1;
+  max-width: 56ch;
+  color: rgba(224, 231, 255, 0.72);
+  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+  line-height: 1.62;
+}
+
+.afl-capability-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.afl-capability-pill {
+  padding: 0.52rem 0.82rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: rgba(229, 231, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.afl-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.afl-primary-cta {
+  height: 3rem;
+  padding-inline: 1.25rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7261ff, #31c7ff);
+  box-shadow: 0 18px 45px rgba(67, 112, 255, 0.32);
+}
+
+.afl-secondary-cta {
+  height: 3rem;
+  padding-inline: 1.15rem;
+  border-radius: 999px;
+  color: #f8fbff;
+  border-color: rgba(116, 228, 255, 0.34);
+  background: linear-gradient(135deg, rgba(78, 120, 255, 0.92), rgba(57, 210, 255, 0.86));
+  box-shadow: 0 16px 38px rgba(40, 120, 255, 0.24);
+}
+
+.afl-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.afl-metric-chip {
+  padding: 0.95rem 1rem;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.afl-metric-label {
+  color: rgba(224, 231, 255, 0.5);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.afl-metric-value {
+  font-size: clamp(1.25rem, 1.7vw, 1.8rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.afl-metric-hint {
+  color: rgba(224, 231, 255, 0.55);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.afl-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.afl-card-head h2 {
+  font-size: 1.12rem;
+  line-height: 1.16;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.afl-summary-card,
+.afl-principles-card {
+  border-radius: 1.45rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.afl-side-rail {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.85rem;
+}
+
+.afl-marquee-section {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(12, 16, 31, 0.72), rgba(7, 10, 22, 0.58));
+  backdrop-filter: blur(18px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+  border-radius: 1.45rem;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.afl-marquee-section-compact {
+  padding: 1rem;
+}
+
+.afl-marquee-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.afl-marquee-title {
+  max-width: none;
+  font-size: 0.92rem;
+  line-height: 1.16;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.afl-marquee-stack {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.afl-marquee-window {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 5%, black 95%, transparent 100%);
+}
+
+.afl-marquee-track {
+  display: flex;
+  gap: 0.65rem;
+  width: max-content;
+  animation: aflMarquee 78s linear infinite;
+}
+
+.afl-marquee-track-reverse {
+  animation-name: aflMarqueeReverse;
+  animation-duration: 92s;
+}
+
+.afl-marquee-window:hover .afl-marquee-track {
+  animation-play-state: paused;
+}
+
+.afl-marquee-card {
+  width: 15.25rem;
+  min-height: 5.9rem;
+  padding: 0.65rem 0.7rem;
+  border-radius: 1.05rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.025));
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.afl-marquee-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.13);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.03));
+}
+
+.afl-marquee-card-top,
+.afl-marquee-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.afl-marquee-type {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.24rem 0.46rem;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.afl-marquee-type-profit {
+  color: rgba(167, 243, 208, 0.95);
+  background: rgba(110, 231, 183, 0.08);
+}
+
+.afl-marquee-type-active {
+  color: rgba(196, 181, 253, 0.96);
+  background: rgba(167, 139, 250, 0.12);
+}
+
+.afl-marquee-agent {
+  color: rgba(224, 231, 255, 0.54);
+  font-size: 0.68rem;
+  text-align: right;
+}
+
+.afl-marquee-asset {
+  font-size: 0.82rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.afl-marquee-detail {
+  color: rgba(224, 231, 255, 0.72);
+  font-size: 0.72rem;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.afl-marquee-thesis {
+  color: rgba(224, 231, 255, 0.48);
+  font-size: 0.63rem;
+  max-width: 9rem;
+}
+
+.afl-marquee-badge {
+  flex-shrink: 0;
+  border-radius: 999px;
+  padding-inline: 0.65rem;
+}
+
+.afl-summary-card {
+  gap: 0.8rem;
+}
+
+.afl-summary-title {
+  font-size: 1.35rem;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  max-width: 14ch;
+}
+
+.afl-summary-copy {
+  color: rgba(224, 231, 255, 0.68);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.afl-summary-grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.afl-summary-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.78rem 0.82rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.afl-summary-metric span {
+  color: rgba(224, 231, 255, 0.48);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.afl-summary-metric strong {
+  color: rgba(245, 247, 255, 0.92);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.afl-card-kicker {
+  color: rgba(150, 166, 255, 0.78);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  margin-bottom: 0.28rem;
+}
+
+.afl-card-head h2 {
+  max-width: 16ch;
+}
+
+.afl-card-badge {
+  gap: 0.32rem;
+  border-color: rgba(110, 231, 183, 0.16);
+  background: rgba(110, 231, 183, 0.08);
+  color: rgba(167, 243, 208, 0.95);
+}
+
+.afl-asset-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.32rem 0.58rem;
+  border-radius: 999px;
+  background: rgba(129, 140, 248, 0.12);
+  color: rgba(224, 231, 255, 0.88);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.afl-agent-name {
+  color: rgba(224, 231, 255, 0.52);
+  font-size: 0.76rem;
+}
+
+.afl-mini-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: #60a5fa;
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.8);
+}
+
+.afl-pnl-badge {
+  border-radius: 999px;
+  padding-inline: 0.7rem;
+}
+
+.afl-principles-card {
+  overflow: hidden;
+}
+
+.afl-card-head-compact h2 {
+  max-width: 18ch;
+}
+
+.afl-signal-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 0.95rem;
+}
+
+.afl-signal-card {
+  border-radius: 1.05rem;
+  padding: 0.95rem;
+  display: flex;
+  align-items: start;
+  gap: 0.8rem;
+}
+
+.afl-signal-icon {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.8rem;
+  color: #bfdbfe;
+  background: rgba(103, 116, 255, 0.16);
+  border: 1px solid rgba(147, 197, 253, 0.12);
+}
+
+.afl-signal-card h3 {
+  font-size: 0.94rem;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.afl-signal-card p {
+  color: rgba(224, 231, 255, 0.62);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+@keyframes aflDash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -220; }
+}
+
+@keyframes aflRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes aflPulse {
+  0%, 100% { opacity: 0.45; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes aflFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, 18px, 0); }
+}
+
+@keyframes aflMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-50% - 0.4rem), 0, 0); }
+}
+
+@keyframes aflMarqueeReverse {
+  from { transform: translate3d(calc(-50% - 0.4rem), 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@media (max-width: 1180px) {
+  .afl-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .afl-title {
+    width: auto;
+  }
+
+  .afl-side-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .afl-shell {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .afl-stage,
+  .afl-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .afl-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .afl-title {
+    max-width: none;
+    width: auto;
+    font-size: clamp(2.1rem, 7vw, 3.4rem);
+  }
+
+  .afl-title-line {
+    white-space: normal;
+  }
+
+  .afl-marquee-title {
+    white-space: normal;
+  }
+
+  .afl-side-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .afl-marquee-header,
+  .afl-marquee-card-top,
+  .afl-marquee-card-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .afl-marquee-card {
+    width: 13.8rem;
+    min-height: 6.2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .afl-shell {
+    padding: 0.8rem;
+  }
+
+  .afl-hero-panel,
+  .afl-summary-card,
+  .afl-principles-card,
+  .afl-signal-card {
+    border-radius: 1.25rem;
+  }
+
+  .afl-card-head,
+  .afl-marquee-header,
+  .afl-marquee-card-top,
+  .afl-marquee-card-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .afl-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .afl-primary-cta,
+  .afl-secondary-cta {
+    width: 100%;
+  }
+
+  .afl-marquee-section {
+    border-radius: 1.25rem;
+  }
+
+  .afl-marquee-title {
+    max-width: none;
+  }
+
+  .afl-marquee-card {
+    width: 12.4rem;
+    min-height: 6rem;
+  }
+}
+
+.light .glow-profit { box-shadow: 0 0 12px oklch(0.55 0.22 155 / 0.1); }
+.light .glow-loss { box-shadow: 0 0 12px oklch(0.55 0.24 25 / 0.1); }
+.light .glow-primary { box-shadow: 0 0 12px oklch(0.5 0.2 250 / 0.12); }
+
+.light ::-webkit-scrollbar-thumb { background: oklch(0.82 0.005 260); }
+.light ::-webkit-scrollbar-thumb:hover { background: oklch(0.7 0.01 260); }

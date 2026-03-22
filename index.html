@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ODROB Trading — Autonomous Index Trading Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body style="margin:0;background:#0d0d14;min-height:100vh">
+    <div id="root">
+      <div id="boot-loader" style="display:flex;align-items:center;justify-content:center;min-height:100vh;color:#888;font-family:monospace;font-size:14px;flex-direction:column;gap:12px">
+        <div style="width:24px;height:24px;border:2px solid #333;border-top-color:#4a6cf7;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+        <span>ODROB Loading...</span>
+      </div>
+    </div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    <noscript><div style="padding:40px;color:#ff6b6b;font-family:monospace">JavaScript is required</div></noscript>
+    <script>
+      // Collect ALL errors
+      window.__ODROB_ERRORS = [];
+      window.__ODROB_MOUNTED = false;
+
+      function addError(msg, err) {
+        window.__ODROB_ERRORS.push({ msg: msg, stack: err && err.stack ? err.stack : '' });
+      }
+
+      window.addEventListener('error', function(e) { addError(e.message, e.error); });
+      window.addEventListener('unhandledrejection', function(e) {
+        var r = e.reason;
+        addError(r && r.message ? r.message : String(r), r);
+      });
+
+      // After 6 seconds, check if app mounted. If not, show diagnostics.
+      setTimeout(function() {
+        if (window.__ODROB_MOUNTED) return;
+        var root = document.getElementById('root');
+        var errors = window.__ODROB_ERRORS;
+        var html = '<div style="padding:40px;background:#0d0d14;color:#ff6b6b;min-height:100vh;font-family:monospace">';
+        html += '<h1 style="color:#fff;margin-bottom:16px">⚠ App failed to load</h1>';
+        if (errors.length > 0) {
+          html += '<h3 style="color:#ff9999">Errors (' + errors.length + '):</h3>';
+          for (var i = 0; i < errors.length; i++) {
+            html += '<pre style="white-space:pre-wrap;font-size:13px;background:#1a1a2e;padding:10px;border-radius:6px;margin:8px 0">' + errors[i].msg + '\n\n' + errors[i].stack + '</pre>';
+          }
+        } else {
+          html += '<p style="color:#ff9999;font-size:14px">No JS errors captured. The app may be stuck loading.</p>';
+          html += '<p style="color:#888;font-size:12px">Possible causes: CSS making content invisible, infinite loading state, or a silent failure.</p>';
+        }
+        html += '<button onclick="localStorage.clear();sessionStorage.clear();location.reload()" style="margin-top:24px;padding:10px 24px;background:#4a6cf7;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px">Clear storage & Reload</button>';
+        html += '</div>';
+        root.innerHTML = html;
+      }, 6000);
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
