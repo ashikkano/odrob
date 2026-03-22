@@ -1,6 +1,6 @@
 # ODROB: Autonomous Trading Platform
 
-ODROB is an open-source platform for building, testing, and launching autonomous trading strategies and on-chain index products. It features a strategy marketplace, transparent analytics, and seamless integration with Tether WDK Wallet for secure USDT onboarding and management.
+ODROB is an open-source platform for building, testing, and launching autonomous trading strategies and index products. It features a strategy marketplace, transparent analytics, and seamless integration with Tether WDK Wallet for secure USDT onboarding and management.
 
 ## Features
 - Create, test, and publish trading strategies
