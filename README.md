@@ -4,9 +4,9 @@ ODROB is an open-source platform for building, testing, and launching autonomous
 
 ## Features
 - Create, test, and publish trading strategies
-- On-chain index and asset management
+- Index and asset management
 - Public and private indexes
-- Automatic dividend payouts
+- Automatic rewards payouts
 - Transparent analytics and dashboards
 - Secure onboarding with Tether WDK Wallet
 - Modern, responsive web interface
